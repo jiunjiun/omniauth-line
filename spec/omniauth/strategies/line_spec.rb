@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe OmniAuth::Strategies::Line do
-  let(:request) { double('Request', :params => {}, :cookies => {}, :env => {}) }
+describe OmniAuth::Strategies::Line do # rubocop:disable Metrics/BlockLength
+  let(:request) { double('Request', params: {}, cookies: {}, env: {}) }
 
   subject do
     args = ['channel_id', 'secret', @options || {}].compact
@@ -56,13 +58,17 @@ describe OmniAuth::Strategies::Line do
     it 'should returns the description' do
       expect(subject.info[:description]).to eq(raw_info_hash['statusMessage'])
     end
+
+    it 'should returns the email' do
+      expect(subject.info[:email]).to eq(nil)
+    end
   end
 
   describe 'request_phase' do
     context 'with no request params set' do
       before do
         allow(subject).to receive(:request).and_return(
-          double('Request', {:params => {}})
+          double('Request', { params: {} })
         )
         allow(subject).to receive(:request_phase).and_return(:whatever)
       end
@@ -72,16 +78,15 @@ describe OmniAuth::Strategies::Line do
       end
     end
   end
-
 end
 
 private
 
 def raw_info_hash
   {
-    'uid'           => 'hoge',
-    'displayName'   => 'Foo Bar',
-    'pictureUrl'    => 'http://xxx.com/aaa.jpg',
+    'uid' => 'hoge',
+    'displayName' => 'Foo Bar',
+    'pictureUrl' => 'http://xxx.com/aaa.jpg',
     'statusMessage' => 'Developer'
   }
 end

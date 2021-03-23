@@ -32,6 +32,7 @@ An example auth hash available in `request.env['omniauth.auth']`:
     :name => "yamada tarou",
     :image => "http://dl.profile.line.naver.jp/xxxxx",
     :description => "breakfast now.",
+    :email => "haha@com.tw",
   },
   :credentials => {
     :token => "a1b2c3d4...", # The OAuth 2.0 access token
